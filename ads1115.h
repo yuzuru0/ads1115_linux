@@ -7,8 +7,8 @@ typedef union
 
 	struct
 	{
-		unsigned short upper_bit:8;
-		unsigned short lower_bit:8;
+		unsigned short upper_byte:8;
+		unsigned short lower_byte:8;
 	}byte;
 
 	struct

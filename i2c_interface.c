@@ -7,6 +7,7 @@
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 #include <linux/i2c.h>
+#include "i2c_interface.h"
 
 #define I2C_DEV_NAME	"/dev/i2c-1"
 

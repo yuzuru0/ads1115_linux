@@ -24,6 +24,17 @@ typedef union
 		unsigned short COMP_QUE:2;
 	}config;
 }ads1115_config_register;
-		
+
+typedef union
+{
+	unsigned short register_16bit;
+
+	struct
+	{
+		unsigned short upper_byte:8;
+		unsigned short lower_byte:8;
+	}byte;
+}ads1115_conversion_register;
+
 
 #endif

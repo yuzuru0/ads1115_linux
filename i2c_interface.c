@@ -93,29 +93,3 @@ int i2c_write(unsigned char dev_addr, unsigned char reg_addr, unsigned char* dat
 	return 0;
 }
 
-int main(void)
-{
-
-	unsigned char data[2];
-	unsigned char dev_addr = 0x48;
-	unsigned char reg_addr = 0x01;
-	short ad_data;
-
-
-	data[0] = 0xc3;
-	data[1] = 0xe2;
-	i2c_write(dev_addr, reg_addr, data,sizeof(data));
-
-	reg_addr = 0x00;
-	usleep(500);
-
-	i2c_read(dev_addr, reg_addr, data, sizeof(data));
-	printf("%x %x\n",data[0],data[1]);
-
-	ad_data = data[0]<<8 |  data[1];
-
-	printf("%d %f\n",ad_data, (ad_data) * 8.0 / 65535);
-
-
-	return 0;
-}

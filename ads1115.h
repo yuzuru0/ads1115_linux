@@ -66,13 +66,9 @@ typedef union
 
 typedef union
 {
-	unsigned short register_16bit;
+	unsigned short word;
+	unsigned char byte[2];
 
-	struct
-	{
-		unsigned short lower_byte:8;
-		unsigned short upper_byte:8;
-	}byte;
 }ads1115_conversion_register;
 
 

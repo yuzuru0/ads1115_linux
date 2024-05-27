@@ -7,7 +7,6 @@ int main(void)
 {
 	unsigned char dev_addr = 0x48;
 	unsigned char reg_addr = 0x01;
-	unsigned char data[2];
 
 	short ad_data;
 
@@ -24,17 +23,15 @@ int main(void)
 	ads1115_config.config.COMP_LAT = NO_LATCH;
 	ads1115_config.config.COMP_QUE = DISABLE_COMP;
 
-	printf("%X %x %x\n",ads1115_config, ads1115_config.byte[0], ads1115_config.byte[1]);
 
 	i2c_write(dev_addr, reg_addr, ads1115_config.byte, sizeof(ads1115_config.byte)); 
 	usleep(2000);
+
 	reg_addr = 0x00;
 	i2c_read(dev_addr, reg_addr, ads1115_results.byte, sizeof(ads1115_results.byte));
-	i2c_read(dev_addr, reg_addr, data, sizeof(data));
 
 
 	printf("%x %x %x %f\n",ads1115_results.word, ads1115_results.byte[0], ads1115_results.byte[1],ads1115_results.word*8.0/65535);
-	printf("%x %x %f\n",data[0], data[1], (data[0]<<8 | data[1])*8.0/65535);
 
 
 

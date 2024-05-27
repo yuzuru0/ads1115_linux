@@ -52,15 +52,15 @@ typedef union
 
 	struct
 	{
+		unsigned short MODE:1;
+		unsigned short PGA:3;
+		unsigned short MUX:3;
+		unsigned short OS:1;
 		unsigned short COMP_QUE:2;
 		unsigned short COMP_LAT:1;
 		unsigned short COMP_POL:1;
 		unsigned short COMP_MODE:1;
 		unsigned short DR:3;
-		unsigned short MODE:1;
-		unsigned short PGA:3;
-		unsigned short MUX:3;
-		unsigned short OS:1;
 	}config;
 }ads1115_config_register;
 

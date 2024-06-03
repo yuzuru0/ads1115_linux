@@ -3,6 +3,20 @@
 #include "ads1115.h"
 #include <unistd.h>
 
+float input_ad(int ch)
+{
+	int voltage;
+
+	return voltage;
+}
+
+int input_ad_raw(int ch)
+{
+	int input_data;
+
+	return input_data;
+}
+
 int main(void)
 {
 	unsigned char dev_addr = 0x48;

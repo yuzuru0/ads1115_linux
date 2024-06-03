@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "i2c_interface.h"
 #include "ads1115.h"
 #include <unistd.h>
@@ -21,6 +22,7 @@ int main(void)
 {
 	unsigned char dev_addr = 0x48;
 	unsigned char reg_addr = 0x01;
+	struct timespec wait_time;
 
 	short ad_data;
 
@@ -39,7 +41,11 @@ int main(void)
 
 
 	i2c_write(dev_addr, reg_addr, ads1115_config.byte, sizeof(ads1115_config.byte)); 
-	usleep(2000);
+
+	wait_time.tv_sec=0;
+	wait_time.tv_nsec=2*1000*1000; // 2msec
+	nanosleep(&wait_time,NULL);
+//	usleep(2000);
 
 	reg_addr = 0x00;
 	i2c_read(dev_addr, reg_addr, ads1115_results.byte, sizeof(ads1115_results.byte));

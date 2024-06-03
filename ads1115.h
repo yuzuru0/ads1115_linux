@@ -43,6 +43,8 @@
 #define FOUR_CONV	2
 #define DISABLE_COMP 3
 
+float input_ad(int ch);
+int input_ad_raw(int ch);
 
 typedef union
 {

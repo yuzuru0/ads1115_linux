@@ -2,6 +2,7 @@
 #include "i2c_interface.h"
 #include "ads1115.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 float input_ad(int ch)
 {
@@ -28,7 +29,7 @@ short input_ad_raw(int ch)
 
 	ads1115_config.config.REG_ADDR = ADS1115_CONFIG_REGISTER;
 	ads1115_config.config.OS = CONV_START;
-	ads1115_config.config.MUX = CH0;
+	ads1115_config.config.MUX = CH0+ch;
 	ads1115_config.config.PGA = PM4096;
 	ads1115_config.config.MODE = SINGLE;
 	ads1115_config.config.DR = SPS860;
@@ -56,12 +57,17 @@ short input_ad_raw(int ch)
 	return ads1115_results.word;
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	short results;
 	float voltage;
+	char *endptr;
+	int ch;
 
-	 voltage = input_ad(0);
+	ch = strtol(argv[1], &endptr,10);
+
+
+	 voltage = input_ad(ch);
 
 
 	printf("%f\n",voltage);

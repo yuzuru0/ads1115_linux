@@ -48,6 +48,11 @@
 
 #define ADS1115_ADDR 0x48
 
+#define MAX_AD_VOLT 4.096
+#define MIN_AD_VOLT -4.096
+#define AD_RESOLUTION 16
+#define MAX_AD_DAT	65535
+
 float input_ad(int ch);
 short input_ad_raw(int ch);
 

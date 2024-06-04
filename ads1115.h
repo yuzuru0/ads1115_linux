@@ -44,9 +44,12 @@
 #define DISABLE_COMP 3
 
 #define ADS1115_CONFIG_REGISTER	0x01
+#define ADS1115_RESULT_REGISTER 0x00
+
+#define ADS1115_ADDR 0x48
 
 float input_ad(int ch);
-int input_ad_raw(int ch);
+short input_ad_raw(int ch);
 
 typedef union
 {

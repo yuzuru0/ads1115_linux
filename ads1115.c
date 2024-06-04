@@ -43,10 +43,6 @@ short input_ad_raw(int ch)
 
 
 	i2c_write(dev_addr, send_buf, sizeof(send_buf)); 
-	for(i=0;i<3;i++)
-		printf("%x ",send_buf[i]);
-
-	printf("\n");
 
 	usleep(2000);
 

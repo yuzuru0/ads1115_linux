@@ -63,11 +63,21 @@ int main(int argc, char *argv[])
 	float voltage;
 	char *endptr;
 	int ch;
+	
+	if(argc <2)
+	{
+		printf("usage: ads1115 ch (ch is 0 to 3)\n");
+		return -1;
+	}	
 
 	ch = strtol(argv[1], &endptr,10);
-
-
-	 voltage = input_ad(ch);
+	if(*endptr !='\0' || ch <0 || ch>3)
+	{
+		printf("Invalidity Channnel\n");
+		printf("usage: ads1115 ch (ch is 0 to 3)\n");
+		return -2;
+	}	
+	voltage = input_ad(ch);
 
 
 	printf("%f\n",voltage);

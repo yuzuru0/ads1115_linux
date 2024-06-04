@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "i2c_interface.h"
 #include "ads1115.h"
 #include <unistd.h>

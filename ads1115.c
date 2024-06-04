@@ -5,7 +5,12 @@
 
 float input_ad(int ch)
 {
-	int voltage;
+	float voltage;
+	short ad_dat;
+
+	ad_dat = input_ad_raw(ch);
+
+	voltage = ad_dat * (MAX_AD_VOLT- MIN_AD_VOLT)/MAX_AD_DAT;
 
 	return voltage;
 }
@@ -58,10 +63,12 @@ short input_ad_raw(int ch)
 int main(void)
 {
 	short results;
+	float voltage;
 
-	results = input_ad_raw(0);
+	 voltage = input_ad(0);
 
-	printf("%x %f\n",results,results*4.096*2/65535);
+
+	printf("%f\n",voltage);
 
 
 

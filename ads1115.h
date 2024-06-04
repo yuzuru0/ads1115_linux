@@ -43,26 +43,29 @@
 #define FOUR_CONV	2
 #define DISABLE_COMP 3
 
+#define ADS1115_CONFIG_REGISTER	0x01
+
 float input_ad(int ch);
 int input_ad_raw(int ch);
 
 typedef union
 {
-	unsigned short word;
-	unsigned char byte[2];
+	unsigned int word;
+	unsigned char byte[3];
 
 
 	struct
 	{
-		unsigned short COMP_QUE:2;
-		unsigned short COMP_LAT:1;
-		unsigned short COMP_POL:1;
-		unsigned short COMP_MODE:1;
-		unsigned short DR:3;
-		unsigned short MODE:1;
-		unsigned short PGA:3;
-		unsigned short MUX:3;
-		unsigned short OS:1;
+		unsigned int COMP_QUE:2;
+		unsigned int COMP_LAT:1;
+		unsigned int COMP_POL:1;
+		unsigned int COMP_MODE:1;
+		unsigned int DR:3;
+		unsigned int MODE:1;
+		unsigned int PGA:3;
+		unsigned int MUX:3;
+		unsigned int OS:1;
+		unsigned int REG_ADDR:8;
 	}config;
 }ads1115_config_register;
 

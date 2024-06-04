@@ -21,12 +21,13 @@ int main(void)
 {
 	unsigned char dev_addr = 0x48;
 	unsigned char reg_addr = 0x01;
-
 	short ad_data;
+
 
 	ads1115_config_register ads1115_config;
 	ads1115_conversion_register ads1115_results;
 
+	ads1115_config.config.REG_ADDR = ADS1115_CONFIG_REGISTER;
 	ads1115_config.config.OS = CONV_START;
 	ads1115_config.config.MUX = CH0;
 	ads1115_config.config.PGA = PM4096;
@@ -38,7 +39,7 @@ int main(void)
 	ads1115_config.config.COMP_QUE = DISABLE_COMP;
 
 
-	i2c_write(dev_addr, reg_addr, ads1115_config.byte, sizeof(ads1115_config.byte)); 
+	i2c_write(dev_addr, ads1115_config.byte, sizeof(ads1115_config.byte)); 
 	usleep(2000);
 
 	reg_addr = 0x00;

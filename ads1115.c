@@ -10,22 +10,13 @@ float input_ad(int ch)
 	return voltage;
 }
 
-int input_ad_raw(int ch)
+short input_ad_raw(int ch)
 {
-	int input_data;
-
-	return input_data;
-}
-
-int main(void)
-{
-	int i;
-	unsigned char dev_addr = 0x48;
-	unsigned char reg_addr = 0x01;
-	short ad_data;
+	unsigned char dev_addr = ADS1115_ADDR;
+	unsigned char reg_addr;
 	unsigned char send_buf[3];
 	unsigned char recv_buf[2];
-
+	int i;
 
 	ads1115_config_register ads1115_config;
 	ads1115_conversion_register ads1115_results;
@@ -61,8 +52,16 @@ int main(void)
 	for(i=0;i<2;i++)
 		ads1115_results.byte[i] = recv_buf[1-i];
 
+	return ads1115_results.word;
+}
 
-	printf("%x %x %x %f\n",ads1115_results.word, ads1115_results.byte[0], ads1115_results.byte[1],ads1115_results.word*4.096*2/65535);
+int main(void)
+{
+	short results;
+
+	results = input_ad_raw(0);
+
+	printf("%x %f\n",results,results*4.096*2/65535);
 
 
 

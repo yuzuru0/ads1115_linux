@@ -3,6 +3,7 @@
 #include "ads1115.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
 
 float input_ad(int ch)
 {
@@ -23,6 +24,7 @@ short input_ad_raw(int ch)
 	unsigned char send_buf[3];
 	unsigned char recv_buf[2];
 	int i;
+	struct timespec wait_time;
 
 	ads1115_config_register ads1115_config;
 	ads1115_conversion_register ads1115_results;
@@ -45,7 +47,10 @@ short input_ad_raw(int ch)
 
 	i2c_write(dev_addr, send_buf, sizeof(send_buf)); 
 
-	usleep(2000);
+	wait_time.tv_sec=0;
+	wait_time.tv_nsec=1.2 *1000 *1000; //1.2msec
+	nanosleep(&wait_time,NULL);
+//	usleep(1200);
 
 	reg_addr = 0x00;
 	i2c_read(dev_addr, reg_addr, recv_buf, sizeof(recv_buf));

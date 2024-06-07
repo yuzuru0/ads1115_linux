@@ -4,7 +4,7 @@
 #include "ads1115.h"
 #include <unistd.h>
 #include <stdlib.h>
-#include <time.h>
+#include <string.h>
 
 float input_ad(int ch)
 {
@@ -45,6 +45,8 @@ short input_ad_raw(int ch)
 	for(i=0;i<3;i++)
 		send_buf[i] = ads1115_config.byte[2-i];
 
+	//ビッグエンディアンの場合は変換しない
+	//memcpy(send_buf,ads1115_config.byte,sizeof(ads1115_config.byte));
 
 	i2c_write(dev_addr, send_buf, sizeof(send_buf)); 
 
@@ -59,6 +61,9 @@ short input_ad_raw(int ch)
 	// 受信データのバイトオーダー変換
 	for(i=0;i<2;i++)
 		ads1115_results.byte[i] = recv_buf[1-i];
+
+	// ビッグエンディアンの場合は変換しない
+	// memcpy(ads1115_results.byte, recv_buf, sizeof(recv_buf));
 
 	return ads1115_results.word;
 }
